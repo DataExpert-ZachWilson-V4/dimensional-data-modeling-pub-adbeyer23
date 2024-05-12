@@ -1,4 +1,4 @@
-CREATE table adbeyer.actors  (
+CREATE or REPLACE table adbeyer.actors  (
 	"actor"  VARCHAR,
 	"actor_id" VARCHAR,
 	"films" ARRAY(
