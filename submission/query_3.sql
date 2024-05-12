@@ -1,4 +1,4 @@
-CREATE TABLE adbeyer.actors_history_scd (
+CREATE or REPLACE TABLE adbeyer.actors_history_scd (
   actor_id VARCHAR,
   actor_name VARCHAR,
   quality_class VARCHAR,
