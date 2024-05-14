@@ -87,7 +87,7 @@ def main(testing: bool):
   if not submissions:
     logger.info('WARNING: No submissions found')
     return None
-  s3_solutions_dir = f"zachwilson/academy/homework-keys/{assignment}"
+  s3_solutions_dir = f"academy/2/homework-keys/{assignment}"
   local_solutions_dir = os.path.join(os.getcwd(), 'solutions', assignment)
   os.makedirs(local_solutions_dir, exist_ok=True)
   system_prompt = get_system_prompt(s3_solutions_dir, local_solutions_dir)
