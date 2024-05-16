@@ -21,7 +21,7 @@ INSERT INTO adbeyer.actors WITH previous_year AS ---cummulative table compositio
                    CASE
                                    WHEN cy.films IS NULL THEN py.films
                                    WHEN py.films IS NULL THEN cy.films
-                                   WHEN py.films IS NOT NULL THEN cy.films
+                                   ELSE cy.films
                                                                    || py.films
                    END AS films , (
                    CASE
