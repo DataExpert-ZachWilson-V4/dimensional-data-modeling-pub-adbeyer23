@@ -9,7 +9,7 @@ INSERT INTO adbeyer.actors WITH previous_year AS ---cummulative table compositio
             (
                      SELECT   actor,
                               actor_id,
-                              array_agg(row(film, votes, rating , film_id )) AS films, --an array as an actor could be in multiple films in the same year
+                              array_agg(row(year, film, votes, rating , film_id )) AS films, --an array as an actor could be in multiple films in the same year
                               avg(rating)                                    AS avg_rating,
                               max(year)                                      AS year
                      FROM     bootcamp.actor_films
