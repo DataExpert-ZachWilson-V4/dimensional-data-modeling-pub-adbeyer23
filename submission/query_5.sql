@@ -18,7 +18,8 @@ WITH -- combining the previous year SCD with the current year's data
   ),
   combined AS ( -- combine last year and current year
     SELECT
-      COALESCE(ly.actor, cy.actor_id) AS actor_id,
+      COALESCE(ly.actor_id, cy.actor_id) AS actor_id,
+      COALESCE(ly.actor_name, cy.actor) AS actor_name,
       COALESCE(ly.start_date, cy.current_year) AS start_year,
       COALESCE(ly.end_date, cy.current_year) AS end_year,
       -- did active change?
@@ -41,13 +42,14 @@ WITH -- combining the previous year SCD with the current year's data
       1920 AS current_year
     FROM
       last_year_scd AS ly
-      FULL OUTER JOIN current_year AS cy ON ly.actor= cy.actor_id
+      FULL OUTER JOIN current_year AS cy ON ly.actor_id= cy.actor_id
       AND ly.end_date + 1 = cy.current_year
   ),
   results AS (
     SELECT
       actor_id,
       current_year,
+      actor_name,
       CASE
         -- no changes
         WHEN active_change = 0
@@ -119,6 +121,7 @@ WITH -- combining the previous year SCD with the current year's data
   )
 SELECT
   results.actor_id,
+  results.actor_name,
   arr.qc,
   arr.is_active,
   arr.start_year,
@@ -127,3 +130,5 @@ SELECT
 FROM
   results
   CROSS JOIN UNNEST (results.change_array) AS arr
+  
+  
